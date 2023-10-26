@@ -7,7 +7,7 @@
       {
         "content": "Kohler-Torp",
         "id": 41491828,
-        "isMultiple": true,
+        "isMultiple": false,
         "answer": [
           {
             "id": 28580339,
@@ -16,13 +16,13 @@
           },
           { "id": 52579454, "content": "Bell-fruit Mallee", "isCorrect": true },
           { "id": 84280396, "content": "Tomentypnum Moss", "isCorrect": false },
-          { "id": 45700866, "content": "Yukon Lupine", "isCorrect": true }
+          { "id": 45700866, "content": "Yukon Lupine", "isCorrect": false }
         ]
       },
       {
         "content": "Lebsack-Ortiz",
         "id": 58671954,
-        "isMultiple": true,
+        "isMultiple": false,
         "answer": [
           {
             "id": 1835346,
@@ -30,7 +30,7 @@
             "isCorrect": false
           },
           { "id": 27600826, "content": "Grayleaf Draba", "isCorrect": false },
-          { "id": 88076568, "content": "Jelly Lichen", "isCorrect": true },
+          { "id": 88076568, "content": "Jelly Lichen", "isCorrect": false },
           { "id": 79878861, "content": "Granular Lichen", "isCorrect": true }
         ]
       },
@@ -82,7 +82,7 @@
       {
         "content": "Prohaska, Champlin and Hilpert",
         "id": 28395204,
-        "isMultiple": true,
+        "isMultiple": false,
         "answer": [
           {
             "id": 68496825,
@@ -93,7 +93,7 @@
           {
             "id": 98566951,
             "content": "Pale Bastard Toadflax",
-            "isCorrect": true
+            "isCorrect": false
           },
           { "id": 10812310, "content": "Highland Rush", "isCorrect": true }
         ]
@@ -135,7 +135,7 @@
       {
         "content": "Ward-Strosin",
         "id": 36216770,
-        "isMultiple": true,
+        "isMultiple": false,
         "answer": [
           {
             "id": 88874085,
@@ -150,7 +150,7 @@
           {
             "id": 48679038,
             "content": "Common Woolly Sunflower",
-            "isCorrect": true
+            "isCorrect": false
           },
           { "id": 33296352, "content": "White Eucalyptus", "isCorrect": false }
         ]

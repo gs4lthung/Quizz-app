@@ -1,8 +1,5 @@
 import React from 'react'
-const handleAnswerSelection = (quizId, quizIsMultiple, answerId, answerIsCorrect) => {
-    // Handle the selected answer here, e.g., update the state.
-    console.log(`Selected Quiz ${quizId}, Is Multiple ${quizIsMultiple}, Answer ${answerId}, Is Correct ${answerIsCorrect}`);
-};
+import { HandleAnswerSelection } from '../layouts/ScreenQuiz/QuizService'
 export default function QuestionForm(props) {
     return (
         <div>
@@ -27,7 +24,7 @@ export default function QuestionForm(props) {
                                                                 id={`quiz${quiz.id}-answer${answer.id}`}
                                                                 name={`quiz${quiz.id}`}
                                                                 value={answer.id}
-                                                                onClick={() => handleAnswerSelection(quiz.id, quiz.isMultiple, answer.id, answer.isCorrect)}
+                                                                onClick={HandleAnswerSelection(quiz.id, answer.id)}
                                                             />
                                                             <label htmlFor={`quiz${quiz.id}-answer${answer.id}`}>{answer.content}</label>
                                                         </li>
@@ -42,6 +39,7 @@ export default function QuestionForm(props) {
                     )
                 })
             }
+
         </div >
     )
 }

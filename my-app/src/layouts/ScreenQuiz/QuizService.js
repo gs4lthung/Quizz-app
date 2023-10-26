@@ -13,3 +13,14 @@ export const FetchQuestionData = () => {
 
     return questionList;
 };
+
+export const HandleAnswerSelection = (quizId, answerId) => {
+    const selectedAnswers = JSON.parse(localStorage.getItem('selectedAnswers')) || {};
+    selectedAnswers[quizId] = answerId;
+    localStorage.setItem('selectedAnswers', JSON.stringify(selectedAnswers));
+};
+
+export const ClearLocalStorage = () => {
+    localStorage.clear();
+}
+
