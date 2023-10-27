@@ -1,9 +1,15 @@
-import QuestionForm from '../../components/QuestionForm';
-import { FetchQuestionData } from '../ScreenQuiz/QuizService'
+import { Suspense, lazy } from 'react';
+import { FetchData } from '../ScreenQuiz/QuizService'
+
+const QuestionForm = lazy(() => import('../../components/QuestionForm'));
 
 export default function ScreenQuiz() {
-    const questionList = FetchQuestionData();
+    const questionList = FetchData();
     return (
-        <QuestionForm quizData={questionList} />
+        <>
+            <Suspense fallback={<div>...Loading...</div>}>
+                <QuestionForm quizData={questionList} />
+            </Suspense >
+        </>
     )
 }
