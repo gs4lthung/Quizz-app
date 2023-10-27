@@ -1,33 +1,52 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HandleInputBlur, HandleInputClick } from '../layouts/ScreenHome/HomeService';
+import { FaLock } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash, FaUser } from "react-icons/fa";
+import './Screenhome.scss'
+import { HandleInputBlur, HandleInputClick, Hide, InputName, BlurName } from './HomeService.js';
 
 export default function LoginForm() {
-    const [type, SetType] = useState(false);
     const nav = useNavigate();
-
-    const { isactive, setInputActive } = HandleInputClick();
-    const { isBlur, setInputBlur } = HandleInputBlur();
-    const handleHide = () => {
-        SetType(!type)
-    }
+    const [type, SetType] = useState('password');
+    const [isactive, SetIsActive] = useState(false);
+    const [isName, SetisName] = useState(false);
+    const HandleHideClick = () => {
+        Hide(type, SetType);
+    };
+    const HandleClick = () => {
+        HandleInputClick(SetIsActive);
+    };
+    const HandleBlur = (e) => {
+        HandleInputBlur(SetIsActive, e);
+    };
+    const HandleNameCLick = () => {
+        InputName(SetisName);
+    };
+    const HandleNameBlur = (e) => {
+        BlurName(SetisName, e);
+    };
     return (
-        <div>
-            <div className='container'>
-                <div className="form">
-                    <div className="group">
-                        <h1>Quiz Test</h1>
-                    </div>
-                    <div className="group-pass">
-                        <i className="fa-solid fa-lock"></i>
-                        <input onBlur={setInputBlur} onClick={setInputActive} type={type ? 'text' : 'password'} id="password" />
-                        <i onClick={handleHide} className={`fa-solid ${type ? 'fa-eye' : 'fa-eye-slash'}`}></i>
-                        <label className={`name ${isactive && !isBlur ? 'active' : ''}`} htmlFor="password">Password</label>
-                    </div>
-                    <button onClick={() => {
-                        nav('/quiz')
-                    }}>Start</button>
+        <div className='container'>
+            <div className="form">
+                <div className="group">
+                    <h1>Quiz Test</h1>
                 </div>
+                <div className="group-pass">
+                    <FaUser className='icon_1' />
+                    <input required onBlur={HandleNameBlur} onClick={HandleNameCLick} type="text" />
+                    <label className={`name ${isName ? 'active' : ''}`}>Name</label>
+                </div>
+                <div className="group-pass">
+                    <FaLock className='icon_1' />
+                    <input onBlur={HandleBlur} onClick={HandleClick} type={type} id="password" />
+                    {
+                        type === 'password' ? (<FaEyeSlash onClick={HandleHideClick} className='fa-eye-slash' />) :
+                            (<FaEye onClick={HandleHideClick} className="fa-eye" />)
+                    }
+                    <label className={`name ${isactive ? 'active' : ''}`} for="password">Password</label>
+                </div>
+                <button onClick={() => { nav('/quiz') }}>Start</button>
             </div>
         </div>
     )
