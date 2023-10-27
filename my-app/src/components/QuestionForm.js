@@ -2,35 +2,37 @@ import React, { useState } from 'react'
 import { ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../layouts/ScreenQuiz/QuizService';
 import './QuestionForm.scss'
 export default function QuestionForm(props) {
-
+    // const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
     const HandleAnswerClick = (quizId, answerId) => {
         SetSelectedAnswers((prev) => ({
             ...prev, [quizId]: answerId
         }))
     }
-
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
     return (
         <div className='question-form'>
+            <h1 className='time'>
+                Time: <label>10:00</label>
+            </h1>
             {
                 props.quizData.map((v, i) => (
 
                     <div key={v.id}>
-                        <h2>Quiz: {v.title}</h2>
-                        <div>
+                        <h2 className='form__header'>Quizz</h2>
+                        <div className='form__body'>
                             {
                                 v.lsQuizz.map((quiz, j) => (
                                     <div key={quiz.id}>
-                                        <p>Question {j + 1}: {quiz.content}</p>
-                                        <ul>
+                                        <p className='question'>Question {j + 1}: {quiz.content}</p>
+                                        <ul className='answers' style={{listStyle:'none'}}>
                                             {
                                                 quiz.answer.map((answer, k) => (
-                                                    <li
+                                                    <li className='answer'
                                                         key={answer.id}
                                                     >
-                                                        <input
+                                                        <input className='input_answer'
                                                             type={quiz.isMultiple ? 'checkbox' : 'radio'}
                                                             id={`quiz${quiz.id}-answer${answer.id}`}
                                                             name={`quiz${quiz.id}`}
@@ -43,12 +45,15 @@ export default function QuestionForm(props) {
                                                 ))
                                             }
                                         </ul>
-                                        <button onClick={() => ClearSelectedAnswer(quiz.id, SetSelectedAnswers)}>Clear</button>
+                                        <button className='clearBtn' onClick={() => ClearSelectedAnswer(quiz.id, SetSelectedAnswers)}>Clear</button>
                                     </div>
                                 ))
                             }
                         </div>
-                        <button onClick={() => ClearAllAnswers(SetSelectedAnswers)}>Clear All Answers</button>
+                        <p className='wrap_btn'>
+                            <button className='btn ClearBtn' onClick={() => ClearAllAnswers(SetSelectedAnswers)}>Clear All Answers</button>
+                            <button className='btn SubmitBtn'>Submit</button>
+                        </p>
                     </div>
                 ))
             }
