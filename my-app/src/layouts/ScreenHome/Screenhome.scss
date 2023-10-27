@@ -1,0 +1,106 @@
+$main-color: #179b77;
+$form-bg: #24333c;
+$bg-color: #c1bdba;
+$white-color:#ffffff;
+$header-size:40px;
+$mg-top:30px;
+$br: 10px;
+$mid-size: 50%;
+@mixin btn($font-size) {
+    width: 80%;
+    height: 50px;
+    background-color: $main-color;
+    color: $white-color;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size;
+}
+@mixin Center($X,$Y,$axisX,$axisY) {
+    left: $X;
+    top: $Y;
+    transform: translate($axisX,$axisY);
+}
+@mixin Position($position, $top, $right,$bottom,$left) {
+    position: $position;
+    @if $top != null{
+        top: $top;
+    }
+    @if $right != null{
+        right: $right;
+    }
+    @if $bottom != null{
+        bottom: $bottom;
+    }
+    @if $left != null{
+        left: $left;
+    }
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container {
+    .form {
+        font-family: monospace;
+        width: 500px;
+        height: 50vh;
+        max-height: 100%;    
+        @include Position(absolute,null ,null ,null ,null );
+        @include Center(50%,50% ,-50% ,-50% );
+        background-color: $form-bg;
+        border-radius: $br;
+        h1 {
+            color: $white-color;
+            font-size: $header-size;
+            text-align: center;
+            margin-top: $mg-top;
+        }
+        .group-pass {
+            margin-top: 50px;
+            width: 80%;
+            height: 40px;
+            @include Position(relative,null ,null ,null ,null );
+            @include Center(50%,0 ,-50% ,0 );
+            i:nth-child(1) {
+                @include Position(absolute,null ,null ,12px ,10px );
+                width: 20px;
+                height: 20px;
+                z-index: 1;
+            }
+            input {
+                border: none;
+                border-bottom: 1px solid #000;
+                width: 100%;
+                height: 50px;
+                outline: none;
+                padding: 4px 40px 0px;
+                @include Position(absolute,null ,null ,0 ,null );
+            }
+            .name {
+                transition: all 0.6s ease;
+                @include Position(absolute,null ,null ,16px ,40px );
+            }
+            .active {
+                @include Position(absolute,null ,null ,35px ,40px );
+                transition: all 0.6s ease;
+            }
+            .fa-eye,
+            .fa-eye-slash {
+                position: absolute;
+                bottom: 15px;
+                right: 10px;
+                @include Position(absolute,null ,10px ,15px ,null );
+            }            
+        }
+        .group-pass input:focus ~ .group-pass .name {
+            bottom: 22px;
+        }
+        button {
+            position: absolute;
+            @include btn(20px);
+            @include Center(50%,60%,-50%,0);
+        }
+    }
+}
