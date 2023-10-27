@@ -34,7 +34,7 @@ export default function ScreenHome() {
                 </div>
                 <div className="group-pass">
                 <FaUser className='icon_1'/>
-                    <input onBlur={HandleNameBlur} onClick={HandleNameCLick} type="text"/>
+                    <input required onBlur={HandleNameBlur} onClick={HandleNameCLick} type="text"/>
                     <label className={`name ${isName ? 'active': ''}`}>Name</label>
                 </div>               
                 <div className="group-pass">
