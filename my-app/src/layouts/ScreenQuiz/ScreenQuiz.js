@@ -7,7 +7,7 @@ export default function ScreenQuiz() {
     const questionList = FetchData();
     return (
         <>
-            <Suspense fallback={<div>...Loading...</div>}>
+            <Suspense fallback={<div>...LOADING...</div>}>
                 <QuestionForm quizData={questionList} />
             </Suspense >
         </>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { ClearSelectedAnswers, LoadAnswers, SaveAnswer } from '../layouts/ScreenQuiz/QuizService';
+import { ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../layouts/ScreenQuiz/QuizService';
+import './QuestionForm.scss'
 export default function QuestionForm(props) {
 
     const [selectedAnswers, SetSelectedAnswers] = useState({});
@@ -12,12 +13,11 @@ export default function QuestionForm(props) {
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
     return (
-        <div>
+        <div className='question-form'>
             {
                 props.quizData.map((v, i) => (
 
                     <div key={v.id}>
-                        <button onClick={() => ClearSelectedAnswers(SetSelectedAnswers)}>Clear</button>
                         <h2>Quiz: {v.title}</h2>
                         <div>
                             {
@@ -43,10 +43,12 @@ export default function QuestionForm(props) {
                                                 ))
                                             }
                                         </ul>
+                                        <button onClick={() => ClearSelectedAnswer(quiz.id, SetSelectedAnswers)}>Clear</button>
                                     </div>
                                 ))
                             }
                         </div>
+                        <button onClick={() => ClearAllAnswers(SetSelectedAnswers)}>Clear All Answers</button>
                     </div>
                 ))
             }

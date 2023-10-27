@@ -2,25 +2,31 @@
 import { useEffect, useState } from 'react';
 import { FETCH_API_DOMAIN } from '../../const/domain';
 
-/***
- *      Day la function fetch API
- *          @param none
- *          @example 
- *              const dataList = FetchData()
- *          @description 
- *              API lay tu /const/domain.js
- *          @return array
- *          @author LTHung
- *          @version 1.0.0.0
+/**
+ *      This function fetches data from an API.
+ *
+ *      @param {void} None - This function does not require any parameters.
+ *
+ *      @example
+ *      const dataList = FetchData();
+ *
+ *      @description
+ *      This function fetches data from an API located at '/const/domain.js'.
+ *
+ *      @return {Array} An array containing the fetched data.
+ *
+ *      @author LTHung
+ *
+ *      @version 1.0.0
  */
 export const FetchData = () => {
-    const [questionList, setQuestionList] = useState([]);
+    const [questionList, SetQuestionList] = useState([]);
 
     useEffect(() => {
         fetch(FETCH_API_DOMAIN)
             .then((res) => res.json())
             .then((data) => {
-                setQuestionList(data);
+                SetQuestionList(data);
             });
     }, []);
 
@@ -29,17 +35,24 @@ export const FetchData = () => {
 
 const localStorageData = 'selectedAnswers';
 
-/***
- *      Day la function load data tu localStorage
- *      @param SetSlectedAnswers : React.Dispatch<React.SetStateAction<{}>>
+/**
+ *      This function loads data from the browser's localStorage.
+ *
+ *      @param {React.Dispatch<React.SetStateAction<{}>>} setSelectedAnswers - The state setter function to update with data from localStorage.
+ *
  *      @example
- *          const [selectedAnswers, SetSelectedAnswers] = useState({});
- *          LoadAnswers(SetSelectedAnswers);
- *      @description 
- *          Neu trong localStorage co data thi se load data chi mot lan khi DidMounted
- *      @return none
+ *      Usage example in a React component:
+ *      const [selectedAnswers, setSelectedAnswers] = useState({});
+ *      LoadAnswers(setSelectedAnswers);
+ *
+ *      @description
+ *      If there is data in the localStorage, this function loads the data only once during the component's mounting phase.
+ *
+ *       @return {void} This function does not return a value.
+ *
  *      @author LTHung
- *      @version 1.0.0.0
+ *
+ *      @version 1.0.0
  */
 export const LoadAnswers = (SetSelectedAnswers) => {
     useEffect(() => {
@@ -49,16 +62,21 @@ export const LoadAnswers = (SetSelectedAnswers) => {
         }
     }, []);
 };
-
-/***
- *      Day la function save data vao localStorage
- *      @param selectedAnswers : {}
- *      @example 
- *          const [selectedAnswers, SetSelectedAnswers] = useState({});
- *          SaveAnswer(selectedAnswers);
- *      @return none
+/**
+ *      This function saves data to the browser's localStorage.
+ *
+ *      @param {Object} selectedAnswers - The data to be saved to localStorage.
+ *
+ *      @example
+ *      Usage example in a React component:
+ *      const [selectedAnswers, setSelectedAnswers] = useState({});
+ *      SaveAnswer(selectedAnswers);
+ *
+ *      @return {void} This function does not return a value.
+ *
  *      @author LTHung
- *      @version 1.0.0.0
+ *
+ *      @version 1.0.0
  */
 export const SaveAnswer = (selectedAnswers) => {
     useEffect(() => {
@@ -66,18 +84,36 @@ export const SaveAnswer = (selectedAnswers) => {
     }, [selectedAnswers]);
 };
 
-/***
- *      Day la function xoa data hien tai dang su dung useState() va trong localStorage
- *      @param SetSlectedAnswers : React.Dispatch<React.SetStateAction<{}>>
- *      @example
- *          onClick={() => HandleAnswerClick(quiz.id, answer.id)}
+/**
+ *      This function clears all current data stored in the local state (managed by useState()) and in the browser's localStorage.
+ *      @param {React.Dispatch<React.SetStateAction<{}>>} setSelectedAnswers - The state setter function to clear the local state.
+ *
+ *      @example To clear all selected answers when performing an event:
+ *           onClick={() => handleAnswerClick(quiz.id, answer.id)}
+ *
  *      @description
- *          Co the dung de xoa data khi thuc hien mot event nao do
- *      @return none
+ *      This function can be used to wipe out all data when a specific event is triggered.
+ *
+ *      @return {void} This function does not return a value.
+ *
  *      @author LTHung
- *      @version 1.0.0.0
+ *
+ *      @version 1.0.0
  */
-export const ClearSelectedAnswers = (SetSelectedAnswers) => {
+export const ClearAllAnswers = (SetSelectedAnswers) => {
     SetSelectedAnswers({});
     localStorage.removeItem(localStorageData)
+}
+
+/**
+ *      This function is used to delete the selected answer for a specific quiz.
+ *      @param {any} quizId - The ID of the quiz for which the answer needs to be deleted.
+ *      @param {React.Dispatch<React.SetStateAction<{}>>} SetSelectedAnswers - The state setter function to update the selected answers.
+ */
+export const ClearSelectedAnswer = (quizId, SetSelectedAnswers) => {
+    SetSelectedAnswers((prev) => {
+        const updatedAnswer = { ...prev };
+        delete updatedAnswer[quizId];
+        return updatedAnswer;
+    })
 }

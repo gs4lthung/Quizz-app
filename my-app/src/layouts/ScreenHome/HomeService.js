@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export function HandleInputClick() {
-  const [isactive,SetIsActive] = useState(false);
-  const setInputActive = (e) => {
-    if (e.target.value === '') {
-        SetIsActive(true);
+    const [isactive, SetIsActive] = useState(false);
+    const setInputActive = (e) => {
+        if (e.target.value === '') {
+            SetIsActive(true);
+        }
+        else {
+            SetIsActive(false);
+        }
     }
-    else {
-        SetIsActive(false);
-    }
-  }
-  return {isactive, setInputActive}
+    return { isactive, setInputActive }
 }
 
 export function HandleInputBlur() {
@@ -23,5 +23,5 @@ export function HandleInputBlur() {
             SetIsBlur(false);
         }
     }
-    return {isBlur,setInputBlur }
+    return { isBlur, setInputBlur }
 }
