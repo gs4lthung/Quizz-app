@@ -47,6 +47,8 @@ $mid-size: 50%;
     box-sizing: border-box;
 }
 .container {
+    background: $main-color;
+    height: 100vh;
     .form {
         font-family: cursive;
         @include block(500px,50vh);
