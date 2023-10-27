@@ -1,11 +1,12 @@
 import { Suspense, lazy } from 'react'
-import './Screenhome.scss'
+import './ScreenHome.scss'
+import LoadingPage from '../../components/LoadingPage';
 
 const LoginForm = lazy(() => import('../../components/LoginForm'));
 export default function ScreenHome() {
     return (
         <>
-            <Suspense fallback={<div>...LOADING...</div>}>
+            <Suspense fallback={<LoadingPage/>}>
                 <LoginForm />
             </Suspense>
         </>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaLock } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash, FaUser } from "react-icons/fa";
-import '../layouts/ScreenHome/Screenhome.scss'
+import '../layouts/ScreenHome/ScreenHome.scss'
 import { HandleInputBlur, HandleInputClick, Hide, InputName, BlurName } from '../layouts/ScreenHome/HomeService';
 
 export default function LoginForm() {
