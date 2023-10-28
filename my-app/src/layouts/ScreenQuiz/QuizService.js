@@ -21,7 +21,6 @@ import { FETCH_API_DOMAIN } from '../../const/domain';
  */
 export const FetchData = () => {
     const [questionList, SetQuestionList] = useState([]);
-
     useEffect(() => {
         fetch(FETCH_API_DOMAIN)
             .then((res) => res.json())

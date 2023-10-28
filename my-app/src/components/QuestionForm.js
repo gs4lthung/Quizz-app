@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../layouts/ScreenQuiz/QuizService';
-import './QuestionForm.scss';
+import '../layouts/ScreenQuiz/QuestionForm.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function QuestionForm(props) {
     const [selectedAnswers, setSelectedAnswers] = useState({});
-
+    const nav = useNavigate();
     const handleAnswerClick = (quizId, answerId) => {
         setSelectedAnswers((prev) => ({
             ...prev,
@@ -30,7 +31,7 @@ export default function QuestionForm(props) {
                                 <li className="answer" key={answer.id}>
                                     <input
                                         className="input_answer"
-                                        type={quiz.isMultiple ? 'checkbox' : 'radio'}
+                                        type={quiz.isMutiple ? "checkbox" : 'radio'}
                                         id={`quiz${quiz.id}-answer${answer.id}`}
                                         name={`quiz${quiz.id}`}
                                         value={answer.id}
@@ -47,7 +48,7 @@ export default function QuestionForm(props) {
             ))}
             <p className="wrap_btn">
                 <button className="btn ClearBtn" onClick={() => ClearAllAnswers(setSelectedAnswers)}>Clear All Answers</button>
-                <button className="btn SubmitBtn">Submit</button>
+                <button onClick={() => {nav('/quiz/result')}} className="btn SubmitBtn">Submit</button>
             </p>
         </div>
     );

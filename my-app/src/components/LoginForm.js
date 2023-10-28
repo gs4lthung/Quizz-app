@@ -28,7 +28,7 @@ export default function LoginForm() {
     };
     return (
         <div className='container'>
-            <div className="form">
+            <div className="form_login">
                 <div className="group">
                     <h1>Quiz Test</h1>
                 </div>

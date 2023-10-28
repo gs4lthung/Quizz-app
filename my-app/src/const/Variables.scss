@@ -1,0 +1,70 @@
+//ScreenHome
+$main_color: #FF8B43;
+$bg-color: #ffefd7;
+$text-color:#8b3600;
+$header-size-40:40px;
+$mg-bottom-12:12px;
+$mg-top-30:30px;
+$br: 10px;
+$mid-size: 50%;
+$mgY: 20px 0;
+$fs_title:xxx-large;
+$fs:x-large;
+$diameter: 150;
+$strokeColor : lightgreen;
+$strokeBgColor : lightgray;
+$strokeWidth : 10;
+@mixin resetPage() {
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+}
+@mixin btn($width,$height, $font-size) {
+    width: $width;
+    height: $height;
+    background-color: $main-color;
+    color: $text-color;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size;
+    border-radius: 40px;
+}
+@mixin block($width, $height) {
+    width: $width;
+    height: $height;
+}
+@mixin Center($X,$Y,$axisX,$axisY) {
+    left: $X;
+    top: $Y;
+    transform: translate($axisX,$axisY);
+}
+@mixin Position($position, $top, $right,$bottom,$left) {
+    position: $position;
+    @if $top != null{
+        top: $top;
+    }
+    @if $right != null{
+        right: $right;
+    }
+    @if $bottom != null{
+        bottom: $bottom;
+    }
+    @if $left != null{
+        left: $left;
+    }
+}
+@mixin flexCenter() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin textResult() {
+    font-size: $fs;
+    font-weight: 600;
+    color: $bg-color;
+    text-align: center;
+    margin-bottom: 12px;
+}

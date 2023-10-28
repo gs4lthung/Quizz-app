@@ -1,0 +1,64 @@
+@import '../../const/Variables.scss';
+@include resetPage();
+.form {
+    @include block(100%,100vh);
+    background-color: $bg-color;
+    @include flexCenter();
+    &_result { 
+        background-color: $main_color;
+        @include block(70%, 80vh);
+        @include Position(relative,null ,null , null, null);
+        border-radius: $br;
+    }
+    &_header {
+        color: $text_color;
+        font-size: $fs_title;
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 30px 0 0 0;
+    }
+    &__name,
+    &__score,
+    &__time {
+        @include textResult();
+    }
+
+    &__btn {
+        @include btn(160px,50px,16px);
+        @include Center(50%,0,-50%,0);
+        @include Position(absolute,90% ,null , null, null);
+        background-color: $text-color;
+        color: $bg-color;
+    }
+    .vkRange {
+        position: absolute;
+        @include Center(50%,60% ,-50% ,-50% );
+        display: inline-flex;
+        svg{
+          fill: $bg-color;
+          transform: rotate(-90deg);
+          border-radius: 50%;
+          stroke: $text-color;
+          stroke-width: $strokeWidth * 1px;
+          @include block($diameter * 1px,$diameter * 1px);
+          circle{
+            transition: stroke .2s ease;
+            animation: dash 5s linear;
+          }
+        }
+        &>div{
+          position: absolute;
+          @include Center(50%,50% ,-50% ,-50% );
+          border-radius: 50%; 
+          @include block(200px,200px);
+          @include flexCenter();
+        }
+    }
+    .form__mark {
+        @include Center(50%,0,-50%,0);
+        @include Position(absolute,80% ,null , null, null);    
+        color: $bg-color;
+        font-weight: bold;
+        font-size: $fs;
+    }
+}

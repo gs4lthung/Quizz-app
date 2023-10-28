@@ -1,87 +1,38 @@
-$main-color: #ffefd7;
-$form-bg: #ff8b43;
-$bg-color: #ffefd7;
-$text-color:#8b3600;
-$header-size:40px;
-$mg-top:30px;
-$br: 10px;
-$mid-size: 50%;
-@mixin btn($font-size) {
-    width: 20%;
-    height: 50px;
-    background-color: $main-color;
-    color: $text-color;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    font-size: $font-size;
-    border-radius: 40px;
-}
-@mixin block($width, $height) {
-    width: $width;
-    height: $height;
-}
-@mixin Center($X,$Y,$axisX,$axisY) {
-    left: $X;
-    top: $Y;
-    transform: translate($axisX,$axisY);
-}
-@mixin Position($position, $top, $right,$bottom,$left) {
-    position: $position;
-    @if $top != null{
-        top: $top;
-    }
-    @if $right != null{
-        right: $right;
-    }
-    @if $bottom != null{
-        bottom: $bottom;
-    }
-    @if $left != null{
-        left: $left;
-    }
-}
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+@import '../../const/Variables.scss';
+@include resetPage();
 .container {
-    background: $main-color;
+    background: $bg-color;
     height: 100vh;
-    .form {
+    .form_login {
         font-family: cursive;
         @include block(500px,50vh);
         max-height: 100%;    
         @include Position(absolute,null ,null ,null ,null );
         @include Center(50%,50% ,-50% ,-50% );
-        background-color: $form-bg;
+        background-color: $main-color;
         border-radius: $br;
         h1 {
             color: $text-color;
-            font-size: $header-size;
+            font-size: $header-size-40;
             text-align: center;
-            margin-top: $mg-top;
+            margin-top: $mg-top-30;
         }
         .group-pass {
             margin-top: 50px;
-            width: 80%;
-            height: 40px;
+            @include block(80%,40px);
             @include Position(relative,null ,null ,null ,null );
             @include Center(50%,0 ,-50% ,0 );
             .icon_1 {
                 @include Position(absolute,null ,null ,16px ,10px );
-                width: 20px;
-                height: 20px;
+                @include block(20px,20px);
                 z-index: 1;
             }
             input {
-                border: none;
                 border-bottom: 1px solid #000;
                 @include block(100%,50px );
                 outline: none;
                 padding: 4px 40px 0px;
-                border-radius: 10px;
+                border-radius: $br;
                 border: none;
                 @include Position(absolute,null ,null ,0 ,null );
             }
@@ -103,8 +54,9 @@ $mid-size: 50%;
         }
         button {
             @include Position(absolute,null ,null ,null ,null );
-            @include btn(20px);
+            @include btn(20%,50px,20px);
             @include Center(50%,80%,-50%,0);
+            background-color: $bg-color;
         }
     }
 }
