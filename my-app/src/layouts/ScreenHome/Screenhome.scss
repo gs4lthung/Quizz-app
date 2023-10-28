@@ -9,7 +9,7 @@
         max-height: 100%;    
         @include Position(absolute,null ,null ,null ,null );
         @include Center(50%,50% ,-50% ,-50% );
-        background-color: $main-color;
+        background-color: $main_color !important;
         border-radius: $br;
         h1 {
             color: $text-color;
