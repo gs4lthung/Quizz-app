@@ -44,7 +44,7 @@ export default function LoginForm() {
                         type === 'password' ? (<FaEyeSlash onClick={HandleHideClick} className='fa-eye-slash' />) :
                             (<FaEye onClick={HandleHideClick} className="fa-eye" />)
                     }
-                    <label className={`name ${isactive ? 'active' : ''}`} for="password">Password</label>
+                    <label className={`name ${isactive ? 'active' : ''}`} htmlFor="password">Password</label>
                 </div>
                 <button onClick={() => { nav('/quiz') }}>Start</button>
             </div>

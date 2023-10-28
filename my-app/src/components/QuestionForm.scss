@@ -1,10 +1,10 @@
 $main-color: #ffefd7;
 $form-bg: #ff8b43;
 $bg-color: #ffefd7;
-$text-color:#8b3600;
-$header-size:40px;
-$mg-bottom:12px;
-@mixin btn($width,$height, $font-size) {
+$text-color: #8b3600;
+$header-size: 40px;
+$mg-bottom: 12px;
+@mixin btn($width, $height, $font-size) {
   width: $width;
   height: $height;
   background-color: $form-bg;
@@ -63,11 +63,11 @@ $mg-bottom:12px;
       margin-bottom: $mg-bottom;
     }
     .input_answer {
-      @include block(20px,20px);
+      @include block(20px, 20px);
       margin-right: $mg-bottom;
     }
     .clearBtn {
-      @include btn(16%,30px, 16px);
+      @include btn(16%, 30px, 16px);
       margin-bottom: $mg-bottom;
     }
   }
@@ -76,7 +76,7 @@ $mg-bottom:12px;
     padding: 30px 0;
     .btn {
       text-align: center;
-      @include btn(150px,30px , 14px);
+      @include btn(150px, 30px, 14px);
       margin-right: $mg-bottom;
     }
   }
