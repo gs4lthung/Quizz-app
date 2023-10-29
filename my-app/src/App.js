@@ -12,11 +12,10 @@ export default function App() {
           <Route path='/' element={<ScreenHome />} />
           <Route path='/quiz' element={<ScreenQuiz />} />
           <Route path='/quiz/result' element={<ScreenResult />} />
-
-          {/* Define a catch-all route for incorrect URLs */}
           <Route path='*' element={<Error404 />} />
         </Routes>
       </BrowserRouter>
+      {/* asdasdas */}
     </>
   )
 }
