@@ -157,31 +157,33 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
     return formattedAnswers;
 }
 
+
 export const PostQuestionData = (id, formattedAnswers) => {
-    // You can perform an HTTP POST request to send the formattedAnswers to the server
-    // Example using fetch API (you can use your preferred method or library):
-    fetch(`https://server.nglearns.com/answer/${id}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formattedAnswers),
-    })
-        .then(response => {
-            if (response.ok) {
-                // Handle success
-                return response.json();
-            } else {
-                // Handle error
-                throw new Error('Failed to post data');
-            }
+    return new Promise((resolve, reject) => {
+        // Your asynchronous operations here
+        fetch(`https://server.nglearns.com/answer/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formattedAnswers),
         })
-        .then(data => {
-            // Do something with the response data if needed
-            localStorage.setItem('result', data)
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle the error here
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to post data');
+                }
+            })
+            .then(data => {
+                // Do something with the response data if needed
+                localStorage.setItem('result', data);
+                console.log(data);
+                resolve(data); // Resolve the Promise on success
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject(error); // Reject the Promise on error
+            });
+    });
 };

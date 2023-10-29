@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
-import { CheckAndClearEmptyQuestion, ClearAllAnswers, ClearSelectedAnswer, FormatSelectedAnswer, LoadAnswers, PostQuestionData, SaveAnswer } from '../../layouts/ScreenQuiz/QuizService';
-import '../../layouts/ScreenQuiz/QuestionForm.scss';
-import { useNavigate } from 'react-router-dom';
-import CountDown from '../CountDown/CountDown';
+import React, { useState } from "react";
+import {
+    CheckAndClearEmptyQuestion,
+    ClearAllAnswers,
+    ClearSelectedAnswer,
+    LoadAnswers,
+    SaveAnswer,
+    FormatSelectedAnswer,
+    PostQuestionData
+} from "../../layouts/ScreenQuiz/QuizService";
+import "./QuestionForm.scss";
+import { useNavigate } from "react-router-dom";
+import CountDown from "../CountDown/CountDown";
 
 export default function QuestionForm(props) {
     const nav = useNavigate();
@@ -54,10 +62,12 @@ export default function QuestionForm(props) {
         });
     };
 
-    const HandleSubmitCLick = () => {
-        nav("/quiz/result")
+    const HandleSubmitCLick = async () => {
         const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-        PostQuestionData(props.quizData.id, formattedAnswers)
+
+        await PostQuestionData(props.quizData.id, formattedAnswers);
+        nav("/quiz/result")
+
     }
 
     LoadAnswers(SetSelectedAnswers);
@@ -66,45 +76,45 @@ export default function QuestionForm(props) {
     return (
         <div className="question-form">
             <h1 className="time">
-                Time: <CountDown seconds = {300} />
+                Time: <CountDown seconds={300} />
             </h1>
             <h2 className="form__header">{props.quizData.title}</h2>
             <h3 className="form__description">{props.quizData.description}</h3>
             {props.quizData.lsQuizz && Object.values(props.quizData.lsQuizz).map((quiz) => (
-                    <div key={quiz.id}>
-                        <div className="form__body">
-                            <p className="question">Question: {quiz.content}</p>
-                            <ul className="answers" style={{ listStyle: "none" }}>
-                                {quiz.answer.map((answer) => (
-                                    <li className="answer" key={answer.id}>
-                                        <input
-                                            className="input_answer"
-                                            type={quiz.isMutiple ? "checkbox" : "radio"}
-                                            id={`quiz${quiz.id}-answer${answer.id}`}
-                                            name={`quiz${quiz.id}`}
-                                            value={answer.id}
-                                            onChange={() => {
-                                                HandleAnswerClick(quiz.id, answer.id, quiz.isMutiple);
-                                            }}
-                                            checked={(selectedAnswers[quiz.id] || []).includes(
-                                                answer.id
-                                            )} // Check if the answer ID is in the selected answers array
-                                        />
-                                        <label htmlFor={`quiz${quiz.id}-answer${answer.id}`}>
-                                            {answer.content}
-                                        </label>
-                                    </li>
-                                ))}
-                            </ul>
-                            <button
-                                className="clearBtn"
-                                onClick={() => ClearSelectedAnswer(quiz.id, SetSelectedAnswers)}
-                            >
-                                Clear
-                            </button>
-                        </div>
+                <div key={quiz.id}>
+                    <div className="form__body">
+                        <p className="question">Question: {quiz.content}</p>
+                        <ul className="answers" style={{ listStyle: "none" }}>
+                            {quiz.answer.map((answer) => (
+                                <li className="answer" key={answer.id}>
+                                    <input
+                                        className="input_answer"
+                                        type={quiz.isMutiple ? "checkbox" : "radio"}
+                                        id={`quiz${quiz.id}-answer${answer.id}`}
+                                        name={`quiz${quiz.id}`}
+                                        value={answer.id}
+                                        onChange={() => {
+                                            HandleAnswerClick(quiz.id, answer.id, quiz.isMutiple);
+                                        }}
+                                        checked={(selectedAnswers[quiz.id] || []).includes(
+                                            answer.id
+                                        )} // Check if the answer ID is in the selected answers array
+                                    />
+                                    <label htmlFor={`quiz${quiz.id}-answer${answer.id}`}>
+                                        {answer.content}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                        <button
+                            className="clearBtn"
+                            onClick={() => ClearSelectedAnswer(quiz.id, SetSelectedAnswers)}
+                        >
+                            Clear
+                        </button>
                     </div>
-                ))}
+                </div>
+            ))}
             <p className="wrap_btn">
                 <button
                     className="btn ClearBtn"

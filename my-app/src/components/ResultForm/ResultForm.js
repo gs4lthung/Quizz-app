@@ -6,19 +6,25 @@ export default function ResultForm() {
   const [result, SetResult] = useState('');
   const [submitTime, SetSubmitTime] = useState('');
   useEffect(() => {
-    // Hàm để cập nhật trạng thái từ localStorage
-    const updateStateFromLocalStorage = () => {
-      const storedUserName = localStorage.getItem('username') || '';
-      const storedResult = localStorage.getItem('result') || '';
-      const storedSubmitTime = localStorage.getItem('submitTime') || '';
 
+
+    // Retrieve the username value from localStorage
+    const storedUserName = localStorage.getItem('username') || '';
+    if (storedUserName) {
       SetUserName(storedUserName);
-      SetResult(storedResult);
-      SetSubmitTime(storedSubmitTime);
     };
 
-    // Gọi hàm cập nhật trạng thái từ localStorage khi component render
-    updateStateFromLocalStorage();
+    //Retrieve the result value from localStorage
+    const storedResult = localStorage.getItem('result') || '';
+    if (storedResult) {
+      SetResult(storedResult)
+    }
+
+    // Retrieve the submitTime value from localStorage
+    const storedSubmitTime = localStorage.getItem('submitTime') || '';
+    if (storedSubmitTime) {
+      SetSubmitTime(storedSubmitTime);
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,11 +43,9 @@ export default function ResultForm() {
             <div>24%</div>
           </div>
           <div className='form__mark'>24/100</div>
-          <button onClick={() => {nav('/quiz/result/answer')}} className='form__btn'>Review Answer</button>
+          <button onClick={() => { nav('/quiz/result/answer') }} className='form__btn'>Review Answer</button>
         </div>
       </div>
     </>
   )
 }
-
-//jjjjjj
