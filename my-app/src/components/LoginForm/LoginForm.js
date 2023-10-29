@@ -44,7 +44,7 @@ export default function LoginForm() {
                 </div>
                 <div className="group-pass">
                     <FaUser className='icon_1' />
-                    <input required onBlur={HandleNameBlur} onClick={HandleNameCLick} type="text"
+                    <input required onBlur={HandleNameBlur} onFocus={HandleNameCLick} type="text"
                         value={username}
                         onChange={(e) => SetUsername(e.target.value)} // Update username state
                     />
@@ -52,7 +52,7 @@ export default function LoginForm() {
                 </div>
                 <div className="group-pass">
                     <FaLock className='icon_1' />
-                    <input onBlur={HandleBlur} onClick={HandleClick} type={type} id="password"
+                    <input onBlur={HandleBlur} onFocusCapture={HandleClick} type={type} id="password"
                         value={password}
                         onChange={(e) => SetPassword(e.target.value)} // Update password state
                     />

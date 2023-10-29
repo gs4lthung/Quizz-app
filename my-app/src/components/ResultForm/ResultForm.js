@@ -7,7 +7,7 @@ export default function ResultForm() {
   const [submitTime, SetSubmitTime] = useState('');
   useEffect(() => {
 
-
+    
     // Retrieve the username value from localStorage
     const storedUserName = localStorage.getItem('username') || '';
     if (storedUserName) {
