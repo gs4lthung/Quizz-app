@@ -26,7 +26,6 @@ export default function QuestionForm(props) {
                 // For multiple-choice questions, handle multiple selections
                 const updatedAnswers = [...(prev[quizId] || [])];
                 const answerIndex = updatedAnswers.indexOf(answerId);
-
                 if (answerIndex === -1) {
                     updatedAnswers.push(answerId);
                 } else {

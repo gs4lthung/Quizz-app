@@ -50,7 +50,6 @@ export const LoadAnswers = (SetSelectedAnswers) => {
         }
     }, [localStorageData, SetSelectedAnswers]);
 };
-
 /**
  *      This function saves data to the browser's localStorage.
  * 
