@@ -1,0 +1,50 @@
+@import '../../const/Variables.scss';
+@include resetPage();
+.question-answer {
+    background-color: $bg-color;
+    height: 100vh;
+    .answer__header {
+      color: $main_color;
+      font-size: xx-large;
+      text-align: center;      
+      margin-bottom: 40px;
+    }
+    .answer__body {
+      margin-left: 40px;
+      .question {
+        margin-bottom: $mg-bottom-12;
+        font-weight: bold;
+      }
+      .answers,
+      .answer {
+        margin-bottom: $mg-bottom-12;
+      }
+      .input_answer {
+        @include block(20px, 20px);
+        margin-right: $mg-bottom-12;
+      }
+      .clearBtn {
+        @include btn(16%, 30px, 16px);
+        margin-bottom: $mg-bottom-12;
+        color: $bg-color;
+        background-color: $main_color;
+      }
+    }
+    .wrap_btn {
+      @include flexCenter();
+      padding: 30px 0;
+      .btn {
+        text-align: center;
+        @include btn(150px, 40px, 14px);
+        margin-right: $mg-bottom-12;
+        color: $bg-color;
+      }
+    }
+}
+.ResultBtn {
+    @include btn(140px,40px,16px);    
+    color: $bg-color;
+    margin: 30px auto;  
+    @include flexCenter();
+}
+  

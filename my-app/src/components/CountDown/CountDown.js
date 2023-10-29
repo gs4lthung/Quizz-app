@@ -40,9 +40,9 @@ export default function CountDown(props) {
     localStorage.setItem("submitTime", submitTime);
   }, [])
   return (
-    <div>
-      <div>{formatTime(time)}</div>
+    <>
+      {formatTime(time)}
       <button onClick={() => HandleButton(fTime, time)}>Check</button>
-    </div>
+    </>
   );
 }

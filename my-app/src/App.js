@@ -4,6 +4,7 @@ import ScreenHome from './layouts/ScreenHome/ScreenHome'
 import ScreenQuiz from './layouts/ScreenQuiz/ScreenQuiz'
 import ScreenResult from './layouts/ScreenResult/ScreenResult'
 import Error404 from './layouts/ErrorPage/Error404'
+import AnswerPage from './layouts/AnswerPage/AnswerPage'
 export default function App() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function App() {
           <Route path='/' element={<ScreenHome />} />
           <Route path='/quiz' element={<ScreenQuiz />} />
           <Route path='/quiz/result' element={<ScreenResult />} />
+          <Route path='/quiz/result/answer' element={<AnswerPage/>} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </BrowserRouter>

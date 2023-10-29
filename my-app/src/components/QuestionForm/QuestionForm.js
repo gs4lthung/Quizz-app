@@ -1,16 +1,8 @@
-import React, { useState } from "react";
-import {
-    CheckAndClearEmptyQuestion,
-    ClearAllAnswers,
-    ClearSelectedAnswer,
-    LoadAnswers,
-    SaveAnswer,
-    FormatSelectedAnswer,
-    PostQuestionData,
-} from "../../layouts/ScreenQuiz/QuizService";
-import "./QuestionForm.scss";
-import { useNavigate } from "react-router-dom";
-import CountDown from "../CountDown/CountDown";
+import React, { useState } from 'react';
+import { CheckAndClearEmptyQuestion, ClearAllAnswers, ClearSelectedAnswer, FormatSelectedAnswer, LoadAnswers, PostQuestionData, SaveAnswer } from '../../layouts/ScreenQuiz/QuizService';
+import '../../layouts/ScreenQuiz/QuestionForm.scss';
+import { useNavigate } from 'react-router-dom';
+import CountDown from '../CountDown/CountDown';
 
 export default function QuestionForm(props) {
     const nav = useNavigate();
@@ -25,7 +17,7 @@ export default function QuestionForm(props) {
      *      onChange={() => { handleAnswerClick(quiz.id, answer.id, quiz.isMutiple) }}
      *      @description
      *      Check if the selected answer is multiple or not and set it with SetSelectedAnswers
-     *      @returns {void}
+     *      @retu   rns {void}
      *      @author LTHung
      *      @version 1.0.0.0
      */
@@ -74,14 +66,11 @@ export default function QuestionForm(props) {
     return (
         <div className="question-form">
             <h1 className="time">
-                <div className="information_time">
-                    Time: <CountDown seconds={300} />
-                </div>
+                Time: <CountDown seconds = {300} />
             </h1>
             <h2 className="form__header">{props.quizData.title}</h2>
             <h3 className="form__description">{props.quizData.description}</h3>
-            {props.quizData.lsQuizz &&
-                Object.values(props.quizData.lsQuizz).map((quiz) => (
+            {props.quizData.lsQuizz && Object.values(props.quizData.lsQuizz).map((quiz) => (
                     <div key={quiz.id}>
                         <div className="form__body">
                             <p className="question">Question: {quiz.content}</p>
