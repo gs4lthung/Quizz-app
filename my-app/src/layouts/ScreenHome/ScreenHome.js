@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import './ScreenHome.scss'
-import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 
 const LoginForm = lazy(() => import('../../components/LoginForm/LoginForm.js'));
 export default function ScreenHome() {

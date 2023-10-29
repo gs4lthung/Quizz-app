@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { FetchData } from '../ScreenQuiz/QuizService'
-import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 
 const QuestionForm = lazy(() => import('../../components/QuestionForm/QuestionForm.js'));
 

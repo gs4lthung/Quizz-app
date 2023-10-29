@@ -1,7 +1,7 @@
 import React from 'react'
 import { Suspense, lazy } from 'react'
 import '../ScreenResult/ScreenResult.scss'
-import LoadingPage from '../../components/LoadingPage/LoadingPage'
+import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js'
 const ResultScreen = lazy(() => import('../../components/ResultForm/ResultForm'));
 export default function ScreenResult() {
   return (
