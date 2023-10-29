@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { ctx } from "../../CtxData";
 
 const formatTime = (time) => {
   let minutes = Math.floor(time / 60);
@@ -9,9 +10,11 @@ const formatTime = (time) => {
 };
 
 
+
 export default function CountDown(props) {
   const [time, SetTimeLeft] = useState(props.seconds);
   const fTime = props.seconds;
+  const ctxDt = useContext(ctx)
   let interval;
   useEffect(() => {
     interval = setInterval(() => {
@@ -32,13 +35,14 @@ export default function CountDown(props) {
     }
   }, [time]);
 
-  const HandleButton = useCallback((fTime,time) => {
-    console.log(`Thoi gian lam bai cua hoc sinh : `+formatTime(fTime -time)) 
+  const HandleButton = useCallback((fTime, time) => {
+    console.log(`Thoi gian lam bai cua hoc sinh : ` + formatTime(fTime - time))
+    ctxDt.SetSubmitTime(formatTime(fTime - time));
   }, [])
   return (
     <div>
       <div>{formatTime(time)}</div>
-      <button onClick={() =>HandleButton(fTime,time)}>Check</button>
+      <button onClick={() => HandleButton(fTime, time)}>Check</button>
     </div>
   );
 }
