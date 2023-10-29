@@ -15,6 +15,7 @@ export default function CountDown(props) {
   const fTime = props.seconds;
   let interval;
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     interval = setInterval(() => {
       SetTimeLeft((pre) => {
         if (pre <= 0) {

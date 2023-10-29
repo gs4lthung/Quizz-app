@@ -5,6 +5,8 @@ import {
     ClearSelectedAnswer,
     LoadAnswers,
     SaveAnswer,
+    FormatSelectedAnswer,
+    PostQuestionData,
 } from "../../layouts/ScreenQuiz/QuizService";
 import "./QuestionForm.scss";
 import { useNavigate } from "react-router-dom";
@@ -60,6 +62,12 @@ export default function QuestionForm(props) {
         });
     };
 
+    const HandleSubmitCLick = () => {
+        nav("/quiz/result")
+        const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
+        PostQuestionData(props.quizData.id, formattedAnswers)
+    }
+
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
 
@@ -67,10 +75,11 @@ export default function QuestionForm(props) {
         <div className="question-form">
             <h1 className="time">
                 <div className="information_time">
-                    Time:  <CountDown seconds={300} />
+                    Time: <CountDown seconds={300} />
                 </div>
             </h1>
             <h2 className="form__header">{props.quizData.title}</h2>
+            <h3 className="form__description">{props.quizData.description}</h3>
             {props.quizData.lsQuizz &&
                 Object.values(props.quizData.lsQuizz).map((quiz) => (
                     <div key={quiz.id}>
@@ -115,9 +124,7 @@ export default function QuestionForm(props) {
                     Clear All Answers
                 </button>
                 <button
-                    onClick={() => {
-                        nav("/quiz/result");
-                    }}
+                    onClick={HandleSubmitCLick}
                     className="btn SubmitBtn"
                 >
                     Submit

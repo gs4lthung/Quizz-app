@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from 'react'
 export default function ResultForm() {
+  const [userName, SetUserName] = useState('');
+  const [result, SetResult] = useState('');
   const [submitTime, SetSubmitTime] = useState('');
 
   useEffect(() => {
+    //Retrieve the userName value from localStorage
+    const storedUserName = localStorage.getItem('username')
+    if (storedUserName) {
+      SetUserName(storedUserName);
+    }
+
+    //Retrieve the result value from localStorage
+    const storedResult = localStorage.getItem('result');
+    if (storedResult) {
+      SetResult(storedResult)
+    }
     // Retrieve the submitTime value from localStorage
     const storedSubmitTime = localStorage.getItem('submitTime');
     if (storedSubmitTime) {
       SetSubmitTime(storedSubmitTime);
     }
+
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
       <div className='form'>
         <div className='form_result'>
           <h2 className='form_header'>Quizz Result</h2>
-          <p className='form__name'>Name: Nguyenx ANh Tuan</p>
-          <p className='form__score'>Total score: 10</p>
+          <p className='form__name'>Name: {userName}</p>
+          <p className='form__score'>Total score: {result}</p>
           <p className='form__time'>Time: {submitTime}</p>
           <div className="vkRange">
             <svg viewBox="0 0 32 32" width="100" height="100">

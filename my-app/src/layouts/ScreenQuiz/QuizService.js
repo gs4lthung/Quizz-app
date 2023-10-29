@@ -157,10 +157,10 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
     return formattedAnswers;
 }
 
-export const PostQuestionData = (formattedAnswers) => {
+export const PostQuestionData = (id, formattedAnswers) => {
     // You can perform an HTTP POST request to send the formattedAnswers to the server
     // Example using fetch API (you can use your preferred method or library):
-    fetch('your_api_endpoint', {
+    fetch(`https://server.nglearns.com/answer/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -178,6 +178,7 @@ export const PostQuestionData = (formattedAnswers) => {
         })
         .then(data => {
             // Do something with the response data if needed
+            localStorage.setItem('result', data)
         })
         .catch(error => {
             console.error('Error:', error);
