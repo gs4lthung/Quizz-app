@@ -9,8 +9,9 @@
     color: $text-color;
     text-align: center;
     line-height: 80px;
-    label {
-      color: $bg-color;
+    .information_time {
+      display: flex;
+      justify-content: center;
     }
   }
   .form__header {

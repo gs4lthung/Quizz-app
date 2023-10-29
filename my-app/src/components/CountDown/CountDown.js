@@ -37,7 +37,7 @@ export default function CountDown(props) {
   }, [])
   return (
     <div>
-      <div>Count Down : {formatTime(time)}</div>
+      <div>{formatTime(time)}</div>
       <button onClick={() =>HandleButton(fTime,time)}>Check</button>
     </div>
   );
