@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 export default function QuestionForm(props) {
     const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
-
     /**
      *      Handle a user's click on an answer option in a quiz.
      *

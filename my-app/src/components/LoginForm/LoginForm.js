@@ -46,7 +46,9 @@ export default function LoginForm() {
                     }
                     <label className={`name ${isactive ? 'active' : ''}`} htmlFor="password">Password</label>
                 </div>
-                <button onClick={() => { nav('/quiz') }}>Start</button>
+                <button className='custom-btn btn' onClick={() => { nav('/quiz') }}>
+                    <span>Start</span>
+                </button>
             </div>
         </div>
     )

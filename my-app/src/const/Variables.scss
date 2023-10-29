@@ -26,15 +26,14 @@ $size-48: 48px;
       }
 }
 @mixin btn($width,$height, $font-size) {
-    width: $width;
-    height: $height;
+    @include block($width, $height);
     background-color: $main-color;
     color: $text-color;
     outline: none;
     border: none;
     cursor: pointer;
     font-size: $font-size;
-    border-radius: 40px;
+    border-radius: 10px;
 }
 @mixin block($width, $height) {
     width: $width;
