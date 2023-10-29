@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckAndClearEmptyQuestion, ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../../layouts/ScreenQuiz/QuizService';
 import './QuestionForm.scss';
 import { useNavigate } from 'react-router-dom';
+import CountDown from '../CountDown/CountDown';
 
 export default function QuestionForm(props) {
     const nav = useNavigate();
@@ -55,7 +56,7 @@ export default function QuestionForm(props) {
     return (
         <div className="question-form">
             <h1 className="time">
-                Time: <label>10:00</label>
+                Time: <CountDown second = {300} />
             </h1>
             <h2 className="form__header">{props.quizData.title}</h2>
             {props.quizData.lsQuizz && Object.values(props.quizData.lsQuizz).map((quiz) => (
