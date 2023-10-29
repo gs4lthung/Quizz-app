@@ -1,7 +1,9 @@
 import React from 'react'
 import './Error404.scss'
+import { useNavigate } from 'react-router-dom'
 
 export default function Error404() {
+    const nav = useNavigate();
     return (
         <section className="page_404">
             <div>
@@ -10,7 +12,7 @@ export default function Error404() {
                         <div className="text">
                             <h1>404</h1>
                             <div className="four_zero_four_bg">
-                                
+
                             </div>
 
                             <div className="contant_box_404">
@@ -20,7 +22,7 @@ export default function Error404() {
 
                                 <p>The page you are looking for not avaible!</p>
 
-                                <a href="" className="link_404">Go to Home</a>
+                                <button onClick={() => nav('/')}>Go to home</button>
                             </div>
                         </div>
                     </div>
