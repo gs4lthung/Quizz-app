@@ -1,15 +1,14 @@
 import React from 'react'
 import { Suspense, lazy } from 'react'
 import '../ScreenResult/ScreenResult.scss'
-import LoadingPage from '../../components/LoadingPage'
-import ResultForm from '../../components/ResultForm'
-const ResultScreen = lazy(() => import('../../components/ResultForm'));
+import LoadingPage from '../../components/LoadingPage/LoadingPage'
+const ResultScreen = lazy(() => import('../../components/ResultForm/ResultForm'));
 export default function ScreenResult() {
   return (
     <>
-        <Suspense fallback={<LoadingPage/>}>
-            <ResultScreen/>
-        </Suspense>
+      <Suspense fallback={<LoadingPage />}>
+        <ResultScreen />
+      </Suspense>
     </>
   )
 }

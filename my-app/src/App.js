@@ -3,14 +3,18 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScreenHome from './layouts/ScreenHome/ScreenHome'
 import ScreenQuiz from './layouts/ScreenQuiz/ScreenQuiz'
 import ScreenResult from './layouts/ScreenResult/ScreenResult'
+import Error404 from './components/Error404/Error404'
 export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes> 
+        <Routes>
           <Route path='/' element={<ScreenHome />} />
-          <Route path='/quiz' element={<ScreenQuiz />}/>
-          <Route path='/quiz/result' element={<ScreenResult/>}/>
+          <Route path='/quiz' element={<ScreenQuiz />} />
+          <Route path='/quiz/result' element={<ScreenResult />} />
+
+          {/* Define a catch-all route for incorrect URLs */}
+          <Route path='*' element={<Error404 />} />
         </Routes>
       </BrowserRouter>
     </>

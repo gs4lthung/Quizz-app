@@ -1,11 +1,11 @@
 import React from 'react'
-import '../components/LoadingPage.scss'
+import './LoadingPage.scss'
 export default function LoadingPage() {
   return (
     <>
-    <div className='wrap__page_load'>
+      <div className='wrap__page_load'>
         <div className='page_load'></div>
-    </div>
+      </div>
     </>
   )
 }

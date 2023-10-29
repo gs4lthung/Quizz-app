@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CheckAndClearEmptyQuestion, ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../layouts/ScreenQuiz/QuizService';
-import '../layouts/ScreenQuiz/QuestionForm.scss';
+import { CheckAndClearEmptyQuestion, ClearAllAnswers, ClearSelectedAnswer, LoadAnswers, SaveAnswer } from '../../layouts/ScreenQuiz/QuizService';
+import './QuestionForm.scss';
 import { useNavigate } from 'react-router-dom';
 
 export default function QuestionForm(props) {
@@ -53,7 +53,7 @@ export default function QuestionForm(props) {
 
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
-    
+
     return (
         <div className="question-form">
             <h1 className="time">
@@ -86,7 +86,7 @@ export default function QuestionForm(props) {
             ))}
             <p className="wrap_btn">
                 <button className="btn ClearBtn" onClick={() => ClearAllAnswers(SetSelectedAnswers)}>Clear All Answers</button>
-                <button onClick={() => {nav('/quiz/result')}} className="btn SubmitBtn">Submit</button>
+                <button onClick={() => { nav('/quiz/result') }} className="btn SubmitBtn">Submit</button>
             </p>
         </div>
     );
