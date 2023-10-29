@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Suspense, lazy } from 'react'
 import '../ScreenResult/ScreenResult.scss'
 import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js'
