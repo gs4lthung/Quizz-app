@@ -1,5 +1,3 @@
-import { Suspense, lazy } from 'react'
-import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 import { HandleInputBlur, HandleInputClick, Hide, InputName, BlurName, CheckAccount, HandleWrongLogin } from './HomeService';
 import { accounts } from '../../const/account';
 import React, { useState } from 'react'

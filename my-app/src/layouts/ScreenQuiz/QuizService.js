@@ -164,34 +164,43 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
     return formattedAnswers;
 }
 
-
-export const PostQuestionData = (id, formattedAnswers) => {
-    return new Promise((resolve, reject) => {
-        fetch(`https://server.nglearns.com/answer/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formattedAnswers),
+/**
+ *      Use to post the data to server
+ *      @param {[]} id 
+ *      @param {{}} formattedAnswers 
+ *      @example
+ *          await PostQuestionData(quizId, formattedAnswers);
+ *      @description 
+ *          Post formatted answers to provided url, the result get back will be store in localStorage.
+ *      @returns {void}
+ *      @author LTHung
+ *      @version 1.0.0.1
+ */
+export const PostQuestionData = async (id, formattedAnswers) => {
+    const nav = useNavigate();
+    fetch(`https://server.nglearns.com/answer/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formattedAnswers),
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                nav('/server-error')
+                throw new Error('Failed to post data');
+            }
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to post data');
-                }
-            })
-            .then(data => {
-                // Do something with the response data if needed
-                localStorage.setItem('result', data);
-                
-                resolve(data); // Resolve the Promise on success
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                reject(error); // Reject the Promise on error
-            });
-    });
+        .then(data => {
+            // Do something with the response data if needed
+            localStorage.setItem('result', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
 };
 
 /**
@@ -204,7 +213,7 @@ export const PostQuestionData = (id, formattedAnswers) => {
      *      onChange={() => { handleAnswerClick(quiz.id, answer.id, quiz.isMutiple) }}
      *      @description
      *      Check if the selected answer is multiple or not and set it with SetSelectedAnswers
-     *      @retu   rns {void}
+     *      @returns {void}
      *      @author LTHung
      *      @version 1.0.0.2
      */
@@ -241,6 +250,22 @@ export const HandleAnswerClick = (quizId, answerId, isMutiple, SetSelectedAnswer
     });
 };
 
+/**
+ *      HandleSubmitClick function submits the quiz data when called.
+ *      @param {React.MutableRefObject<undefined>} countDownRef 
+ *      @param {function} formatTime 
+ *      @param {NavigateFunction} nav 
+ *      @param {{}} selectedAnswers 
+ *      @param {[]} quizId 
+ *      @example
+ *          onClick={() => HandleSubmitCLick(countDownRef, formatTime, nav, selectedAnswers, questionList.id)}
+ *      @description 
+ *          When click to the submit button: store the time of doing the quiz to localStorage, post the answer with a formatted form to the server and get the data of the result back. Finally, navigate to the result screen.
+ *      @returns {void}
+ *      @author LTHung
+ *      @version 1.0.0.3
+ *      
+ */
 export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedAnswers, quizId) => {
     const countDownTime = countDownRef.current.getTime();
     const formattedTime = formatTime(countDownTime);
@@ -248,7 +273,7 @@ export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedA
     localStorage.setItem("submitTime", formattedTime);
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-    const result =  await PostQuestionData(quizId, formattedAnswers);
+    const result = await PostQuestionData(quizId, formattedAnswers);
     nav("/quiz/result");
     console.log(result.answerId)
 }
