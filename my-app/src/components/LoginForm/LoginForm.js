@@ -49,7 +49,7 @@ export default function LoginForm() {
                         onChange={(e) => SetUsername(e.target.value)} // Update username state
                     />
                     <label className={`name ${isName ? 'active' : ''}`}>Name</label>
-                </div>
+                </div> 
                 <div className="group-pass">
                     <FaLock className='icon_1' />
                     <input onBlur={HandleBlur} onFocusCapture={HandleClick} type={type} id="password"

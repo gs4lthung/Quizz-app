@@ -102,6 +102,7 @@ export const ClearSelectedAnswer = (quizId, SetSelectedAnswers) => {
     SetSelectedAnswers((prev) => {
         const updatedAnswer = { ...prev };
         delete updatedAnswer[quizId];
+        
         return updatedAnswer;
     })
 }

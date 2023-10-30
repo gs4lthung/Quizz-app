@@ -63,7 +63,6 @@ export default function QuestionForm(props) {
     };
 
     const HandleSubmitCLick = async () => {
-
         const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
         await PostQuestionData(props.quizData.id, formattedAnswers);
         nav("/quiz/result");

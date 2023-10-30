@@ -3,21 +3,10 @@ import '../../layouts/AnswerPage/AnswerPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { LoadAnswers, PostQuestionData } from '../../layouts/ScreenQuiz/QuizService';
 export default function AnswerForm(props) {
-    const [selectedAnswers, SetSelectedAnswers] = useState({});
-    const [quizResult, setQuizResult] = useState('');
     const nav = useNavigate();
-    // const [isShow,SetIsShow] = useState(false);
-    useEffect(() => {
-        const userAnswers = LoadAnswers(SetSelectedAnswers);
-        // Load user's answers
-        PostQuestionData(props.quizData.id, userAnswers)
-            .then(result => {
-                setQuizResult(result);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }, [selectedAnswers, props.quizData.id]);
+    const [selectedAnswers, SetSelectedAnswers] = useState({});
+    LoadAnswers(SetSelectedAnswers);
+    console.log(Object.values(selectedAnswers));
     return (
     <div className="question-answer">
             <h2 className="answer__header">{props.quizData.title}</h2>
@@ -37,10 +26,8 @@ export default function AnswerForm(props) {
                                         checked = {(selectedAnswers[quiz.id] || []).includes(answer.id)} 
                                     />
                                     <label htmlFor={`quiz${quiz.id}-answer${answer.id}`}>{answer.content}</label>
-                                    {quizResult && quizResult[quiz.id] === answer.id ? (
-                                        <label>✔️</label> // Hiển thị đáp án đúng
-                                    ) : quizResult && quizResult[quiz.id] !== answer.id && (selectedAnswers[quiz.id] || []).includes(answer.id) ? (
-                                        <label>❌</label> // Hiển thị đáp án sai
+                                    {selectedAnswers[quiz.id] && selectedAnswers[quiz.id].includes(answer.id) ? (
+                                        <label>✔️</label>
                                     ) : null}
                                 </li>
                             ))}
