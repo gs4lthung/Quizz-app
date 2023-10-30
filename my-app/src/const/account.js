@@ -1,0 +1,6 @@
+export const accounts = [
+    { "username": "nguyenanhtuan", "password": "123456" },
+    { "username": "nguyentienkha", "password": "123456" },
+    { "username": "lamtienhung", "password": "123456" },
+    { "username": "letrongnhan", "password": "123456" }
+]
