@@ -41,8 +41,10 @@
           stroke: $text-color;
           stroke-width: $strokeWidth * 1px;
           @include block($diameter * 1px,$diameter * 1px);
+          @include Position(relative,null ,null , null, 0);
           circle{
-            transition: stroke .2s ease;
+            margin: auto;
+            transition: all .2s ease;
             animation: dash 5s linear;
           }
         }

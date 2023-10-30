@@ -248,5 +248,5 @@ export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedA
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
     await PostQuestionData(quizId, formattedAnswers);
-    nav("/error");
+    nav("/quiz/result");
 }

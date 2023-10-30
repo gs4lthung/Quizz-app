@@ -1,11 +1,13 @@
+import { Suspense, lazy } from 'react'
+import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
+import { HandleInputBlur, HandleInputClick, Hide, InputName, BlurName, CheckAccount, HandleWrongLogin } from './HomeService';
+import { accounts } from '../../const/account';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaLock } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash, FaUser } from "react-icons/fa";
 import './ScreenHome.scss'
-import { HandleInputBlur, HandleInputClick, Hide, InputName, BlurName, CheckAccount, HandleWrongLogin } from './HomeService';
-import { accounts } from '../../const/account';
 
 export default function ScreenHome() {
     const nav = useNavigate();
