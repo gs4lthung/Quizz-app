@@ -7,8 +7,6 @@ export default function ScreenResult(props) {
   const [result, SetResult] = useState('');
   const [submitTime, SetSubmitTime] = useState('');
   useEffect(() => {
-
-
     // Retrieve the username value from localStorage
     const storedUserName = localStorage.getItem('username') || '';
     if (storedUserName) {
@@ -43,7 +41,7 @@ export default function ScreenResult(props) {
                 ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
                 : 0
               }
-              100
+              100 
               `}></circle>
           </svg>
           <div>{props.quizData.lsQuizz

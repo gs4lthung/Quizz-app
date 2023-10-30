@@ -1,5 +1,5 @@
 import { useRef, useState, Suspense } from 'react';
-import { FetchData, FormatSelectedAnswer, PostQuestionData } from '../ScreenQuiz/QuizService'
+import { FetchData } from '../ScreenQuiz/QuizService'
 import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ export default function ScreenQuiz() {
     const [selectedAnswers, SetSelectedAnswers] = useState({});
     const countDownRef = useRef();
     // console.log(questionList)
-    
+
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
     return (
