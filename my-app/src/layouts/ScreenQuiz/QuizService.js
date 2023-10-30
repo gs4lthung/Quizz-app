@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { FETCH_API_DOMAIN } from '../../const/domain';
+import { useNavigate } from 'react-router-dom';
 const localStorageData = 'selectedAnswers';
 
 /**
@@ -16,12 +17,17 @@ const localStorageData = 'selectedAnswers';
  *      @version 1.0.0.0
  */
 export const FetchData = () => {
+    const nav = useNavigate();
     const [questionList, SetQuestionList] = useState([]);
     useEffect(() => {
         fetch(FETCH_API_DOMAIN)
             .then((res) => res.json())
             .then((data) => {
                 SetQuestionList(data);
+            })
+            .catch((error) => {
+                console.log(error);
+                nav('/server-error')
             });
     }, []);
 
@@ -102,7 +108,7 @@ export const ClearSelectedAnswer = (quizId, SetSelectedAnswers) => {
     SetSelectedAnswers((prev) => {
         const updatedAnswer = { ...prev };
         delete updatedAnswer[quizId];
-        
+
         return updatedAnswer;
     })
 }
@@ -122,7 +128,7 @@ export const CheckAndClearEmptyQuestion = (selectedAnswers, quizId, SetSelectedA
 }
 
 /**
- *      This function returns a specific format required by the customer.
+ *      This function returns a specific format
  * 
  *      @param {Object} selectedAnswers - The selected answers object.
  *      @example
@@ -161,7 +167,6 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
 
 export const PostQuestionData = (id, formattedAnswers) => {
     return new Promise((resolve, reject) => {
-        // Your asynchronous operations here
         fetch(`https://server.nglearns.com/answer/${id}`, {
             method: 'POST',
             headers: {
@@ -187,3 +192,61 @@ export const PostQuestionData = (id, formattedAnswers) => {
             });
     });
 };
+
+/**
+     *      Handle a user's click on an answer option in a quiz.
+     *
+     *      @param {string} quizId - The unique identifier of the quiz.
+     *      @param {string} answerId - The identifier of the selected answer.
+     *      @param {boolean} isMultiple - Indicates whether the question allows multiple answers.
+     *      @example
+     *      onChange={() => { handleAnswerClick(quiz.id, answer.id, quiz.isMutiple) }}
+     *      @description
+     *      Check if the selected answer is multiple or not and set it with SetSelectedAnswers
+     *      @retu   rns {void}
+     *      @author LTHung
+     *      @version 1.0.0.2
+     */
+export const HandleAnswerClick = (quizId, answerId, isMutiple, SetSelectedAnswers) => {
+    SetSelectedAnswers((prev) => {
+        if (isMutiple) {
+            // For multiple-choice questions, handle multiple selections
+            const updatedAnswers = [...(prev[quizId] || [])];
+            const answerIndex = updatedAnswers.indexOf(answerId);
+            if (answerIndex === -1) {
+                updatedAnswers.push(answerId);
+            } else {
+                updatedAnswers.splice(answerIndex, 1);
+            }
+            const newSelectedAnswers = {
+                ...prev,
+                [quizId]: updatedAnswers,
+            };
+            // Call CheckAndClearEmptyQuestion to remove local storage data if the question is empty
+            CheckAndClearEmptyQuestion(
+                newSelectedAnswers,
+                quizId,
+                SetSelectedAnswers
+            );
+            return newSelectedAnswers;
+        } else {
+            // For non-multiple-choice questions, replace the existing selection with the new one
+            const newSelectedAnswer = {
+                ...prev,
+                [quizId]: [answerId],
+            };
+            return newSelectedAnswer;
+        }
+    });
+};
+
+export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedAnswers, quizId) => {
+    const countDownTime = countDownRef.current.getTime();
+    const formattedTime = formatTime(countDownTime);
+
+    localStorage.setItem("submitTime", formattedTime);
+
+    const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
+    await PostQuestionData(quizId, formattedAnswers);
+    nav("/error");
+}
