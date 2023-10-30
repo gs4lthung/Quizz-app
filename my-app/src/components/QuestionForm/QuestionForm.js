@@ -10,12 +10,10 @@ import {
 } from "../../layouts/ScreenQuiz/QuizService";
 import "./QuestionForm.scss";
 import { useNavigate } from "react-router-dom";
-import {CountDown} from "../CountDown/CountDown";
-import { formatTime } from '../CountDown/CountDown'; 
+import { CountDown } from "../CountDown/CountDown";
 export default function QuestionForm(props) {
     const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
-    const [submitTime, setSubmitTime] = useState(null);
     const countDownRef = useRef();
     /**
      *      Handle a user's click on an answer option in a quiz.
@@ -65,14 +63,10 @@ export default function QuestionForm(props) {
     };
 
     const HandleSubmitCLick = async () => {
-        const countDownTime = countDownRef.current.getTime();
-        const formattedTime = formatTime(countDownTime);
-    
-        localStorage.setItem("submitTime", formattedTime);
-    
+
         const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
         await PostQuestionData(props.quizData.id, formattedAnswers);
-        nav("/quiz/result", { submitTime: formattedTime });
+        nav("/quiz/result");
     }
 
     LoadAnswers(SetSelectedAnswers);
@@ -81,7 +75,7 @@ export default function QuestionForm(props) {
     return (
         <div className="question-form">
             <h1 className="time">
-                Time: <CountDown seconds={300} ref={countDownRef}/>
+                Time: <CountDown seconds={300} ref={countDownRef} />
             </h1>
             <h2 className="form__header">{props.quizData.title}</h2>
             <h3 className="form__description">{props.quizData.description}</h3>

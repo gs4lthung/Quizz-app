@@ -1,7 +1,7 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 
-export function formatTime(time)  {
+export function formatTime(time) {
   let minutes = Math.floor(time / 60);
   let seconds = Math.floor(time - minutes * 60);
   if (minutes < 10) minutes = "0" + minutes;

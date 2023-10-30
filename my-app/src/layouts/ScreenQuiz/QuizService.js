@@ -178,7 +178,6 @@ export const PostQuestionData = (id, formattedAnswers) => {
             .then(data => {
                 // Do something with the response data if needed
                 localStorage.setItem('result', data);
-                console.log(data);
                 resolve(data); // Resolve the Promise on success
             })
             .catch(error => {
