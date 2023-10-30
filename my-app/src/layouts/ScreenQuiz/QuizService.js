@@ -184,6 +184,7 @@ export const PostQuestionData = (id, formattedAnswers) => {
             .then(data => {
                 // Do something with the response data if needed
                 localStorage.setItem('result', data);
+                
                 resolve(data); // Resolve the Promise on success
             })
             .catch(error => {
@@ -247,6 +248,7 @@ export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedA
     localStorage.setItem("submitTime", formattedTime);
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-    await PostQuestionData(quizId, formattedAnswers);
+    const result =  await PostQuestionData(quizId, formattedAnswers);
     nav("/quiz/result");
+    console.log(result.answerId)
 }

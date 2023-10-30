@@ -1,5 +1,5 @@
 import { useRef, useState, Suspense } from 'react';
-import { FetchData } from '../ScreenQuiz/QuizService'
+import { FetchData, FormatSelectedAnswer, PostQuestionData } from '../ScreenQuiz/QuizService'
 import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 import { useNavigate } from "react-router-dom";
 import {
@@ -19,8 +19,8 @@ export default function ScreenQuiz() {
     const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
     const countDownRef = useRef();
-
-
+    // console.log(questionList)
+    
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
     return (
@@ -78,7 +78,7 @@ export default function ScreenQuiz() {
                         Clear All Answers
                     </button>
                     <button
-                        onClick={() => HandleSubmitCLick(countDownRef, formatTime, nav, selectedAnswers, questionList.id, nav)}
+                        onClick={() => HandleSubmitCLick(countDownRef, formatTime, nav, selectedAnswers, questionList.id)}
                         className="btn SubmitBtn"
                     >
                         Submit
