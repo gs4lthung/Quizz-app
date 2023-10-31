@@ -176,7 +176,7 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
  *      @author LTHung
  *      @version 1.0.0.1
  */
-export const PostQuestionData = async (id, formattedAnswers) => {
+export const PostQuestionData = async (id, formattedAnswers, nav) => {
     return new Promise((resolve, reject) => {
 
         fetch(`https://server.nglearns.com/answer/${id}`, {
@@ -190,6 +190,7 @@ export const PostQuestionData = async (id, formattedAnswers) => {
                 if (response.ok) {
                     return response.json();
                 } else {
+                    nav('/server-error')
                     throw new Error('Failed to post data');
                 }
             })
@@ -201,6 +202,7 @@ export const PostQuestionData = async (id, formattedAnswers) => {
             .catch(error => {
                 console.error('Error:', error);
                 reject(error); // Reject the Promise with the error
+                nav('/server-error')
             });
     });
 };
@@ -268,13 +270,13 @@ export const HandleAnswerClick = (quizId, answerId, isMutiple, SetSelectedAnswer
  *      @version 1.0.0.3
  *      
  */
-export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedAnswers, quizId) => {
+export const HandleSubmitCLick = async (countDownRef, formatTime, navResult, selectedAnswers, quizId, navError) => {
     const countDownTime = countDownRef.current.getTime();
     const formattedTime = formatTime(countDownTime);
 
     localStorage.setItem("submitTime", formattedTime);
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-    await PostQuestionData(quizId, formattedAnswers)
-    nav("/quiz/result");
+    await PostQuestionData(quizId, formattedAnswers, navError)
+    navResult("/quiz/result");
 }
