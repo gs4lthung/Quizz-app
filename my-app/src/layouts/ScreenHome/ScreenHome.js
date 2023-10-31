@@ -12,7 +12,7 @@ export default function ScreenHome() {
     const [type, SetType] = useState('password');
     const [isactive, SetIsActive] = useState(false);
     const [isName, SetisName] = useState(false);
-
+    const [isError,SetIsError] = useState(false);
     const [username, SetUsername] = useState(''); // State for username
     const [password, SetPassword] = useState(''); // State for password
     const [cntWrongLogin, SetCntWrongLogin] = useState(0);
@@ -36,13 +36,15 @@ export default function ScreenHome() {
         console.log(username + ' ' + password)
         const isLogin = await CheckAccount(accounts, username, password);
         if (isLogin === true) {
+            SetIsError(false)
             // Save the username and password in localStorage
             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
-
+            
             // Redirect to the quiz page
             nav('/quiz');
         } else {
+            SetIsError(true)
             SetCntWrongLogin(prev => prev + 1);
         }
     };
@@ -50,8 +52,10 @@ export default function ScreenHome() {
     return (
         <div className='container'>
             <div className="form_login">
+
                 <div className="group">
                     <h1>Quiz Test</h1>
+                    {isError ? <p className='error'>Username or Password wrong!</p>: ''}
                 </div>
                 <div className="group-pass">
                     <FaUser className='icon_1' />

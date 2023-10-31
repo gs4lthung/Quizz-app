@@ -19,8 +19,8 @@ export default function ScreenQuiz() {
     const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
     const countDownRef = useRef();
-    // console.log(questionList)
-
+    
+    
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
     return (

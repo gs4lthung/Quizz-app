@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../ScreenResult/ScreenResult.scss'
-export default function ScreenResult(props) {
+import { FetchData } from '../ScreenQuiz/QuizService';
+export default function ScreenResult() {  
   const nav = useNavigate();
   const [userName, SetUserName] = useState('');
   const [result, SetResult] = useState('');
@@ -36,20 +37,12 @@ export default function ScreenResult(props) {
         <p className='form__time'>Time: {submitTime}</p>
         <div className="vkRange">
           <svg viewBox="0 0 32 32" width="100" height="100">
-            <circle r="16" cx="16" cy="16" strokeDasharray={`
-              ${props.quizData.lsQuizz
-                ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
-                : 0
-              }
-              100 
-              `}></circle>
+            <circle r="16" cx="16" cy="16" strokeDasharray="50 100"></circle>
           </svg>
-          <div>{props.quizData.lsQuizz
-            ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
-            : 0}
+          <div>24%
           </div>
         </div>
-        <div className='form__mark'>{`${result} / ${Object.entries(props.quizData.lsQuizz).length}`}</div>
+        <div className='form__mark'>24/100</div>
         <button onClick={() => { nav('/quiz/result/answer') }} className='form__btn'>Review Answer</button>
       </div>
     </div>

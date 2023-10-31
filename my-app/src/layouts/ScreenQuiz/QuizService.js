@@ -177,32 +177,30 @@ export const FormatSelectedAnswer = (selectedAnswers) => {
  *      @version 1.0.0.1
  */
 export const PostQuestionData = async (id, formattedAnswers) => {
-    return new Promise((resolve, reject) => {
-
-        fetch(`https://server.nglearns.com/answer/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formattedAnswers),
+    const nav = useNavigate();
+    fetch(`https://server.nglearns.com/answer/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formattedAnswers),
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                nav('/server-error')
+                throw new Error('Failed to post data');
+            }
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to post data');
-                }
-            })
-            .then(data => {
-                // Do something with the response data if needed
-                localStorage.setItem('result', data);
-                resolve(data); // Resolve the Promise with the response data
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                reject(error); // Reject the Promise with the error
-            });
-    });
+        .then(data => {
+            // Do something with the response data if needed
+            localStorage.setItem('result', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
 };
 
 /**
@@ -275,6 +273,6 @@ export const HandleSubmitCLick = async (countDownRef, formatTime, nav, selectedA
     localStorage.setItem("submitTime", formattedTime);
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-    await PostQuestionData(quizId, formattedAnswers)
+    await PostQuestionData(quizId, formattedAnswers);
     nav("/quiz/result");
 }
