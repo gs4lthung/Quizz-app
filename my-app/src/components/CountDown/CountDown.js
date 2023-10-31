@@ -1,4 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FormatSelectedAnswer, PostQuestionData } from "../../layouts/ScreenQuiz/QuizService";
 
 
 export function formatTime(time) {
@@ -13,7 +15,10 @@ export const CountDown = forwardRef((props, ref) => {
   const fTime = props.seconds;
   let interval;
 
+  const nav = useNavigate();
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     interval = setInterval(() => {
       SetTimeLeft((pre) => {
         if (pre <= 0) {
@@ -27,9 +32,18 @@ export const CountDown = forwardRef((props, ref) => {
   }, []);
 
   useEffect(() => {
-    if (time <= 0) {
-      clearInterval(interval);
+    const TimeOut = async () => {
+      if (time <= 0) {
+
+        clearInterval(interval);
+        const formattedTime = formatTime(props.seconds);
+        localStorage.setItem("submitTime", formattedTime);
+        const formattedAnswers = FormatSelectedAnswer(props.selectedAnswers);
+        await PostQuestionData(props.quizId, formattedAnswers, props.navError);
+        nav('/quiz/result');
+      }
     }
+    TimeOut();
   }, [time]);
 
   useImperativeHandle(ref, () => ({

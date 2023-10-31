@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../ScreenResult/ScreenResult.scss'
-import { FetchData } from '../ScreenQuiz/QuizService';
-export default function ScreenResult() {  
+export default function ScreenResult(props) {
   const nav = useNavigate();
   const [userName, SetUserName] = useState('');
   const [result, SetResult] = useState('');
   const [submitTime, SetSubmitTime] = useState('');
+  const [selectedAnswers, SetSelectedAnswers] = useState({})
   useEffect(() => {
     // Retrieve the username value from localStorage
     const storedUserName = localStorage.getItem('username') || '';
@@ -25,10 +25,17 @@ export default function ScreenResult() {
     if (storedSubmitTime) {
       SetSubmitTime(storedSubmitTime);
     };
+
+    const storedAnswers = localStorage.getItem('selectedAnswers' || '');
+    if (storedAnswers) {
+      SetSelectedAnswers(storedAnswers)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, []);
+
   return (
+
     <div className='form'>
       <div className='form_result'>
         <h2 className='form_header'>Quizz Result</h2>
@@ -37,12 +44,20 @@ export default function ScreenResult() {
         <p className='form__time'>Time: {submitTime}</p>
         <div className="vkRange">
           <svg viewBox="0 0 32 32" width="100" height="100">
-            <circle r="16" cx="16" cy="16" strokeDasharray="50 100"></circle>
+            <circle r="16" cx="16" cy="16" strokeDasharray={`
+              ${props.quizData.lsQuizz
+                ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
+                : 0
+              }
+              100 
+              `}></circle>
           </svg>
-          <div>24%
+          <div>{props.quizData.lsQuizz
+            ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
+            : 0}
           </div>
         </div>
-        <div className='form__mark'>24/100</div>
+        <div className='form__mark'>{`${result} / ${Object.entries(props.quizData.lsQuizz).length}`}</div>
         <button onClick={() => { nav('/quiz/result/answer') }} className='form__btn'>Review Answer</button>
       </div>
     </div>
