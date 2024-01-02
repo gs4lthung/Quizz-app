@@ -275,6 +275,6 @@ export const HandleSubmitCLick = async (countDownRef, formatTime, navResult, sel
     localStorage.setItem("submitTime", formattedTime);
 
     const formattedAnswers = FormatSelectedAnswer(selectedAnswers);
-    await PostQuestionData(quizId, formattedAnswers)
-    nav("/quiz/result");
+    await PostQuestionData(quizId, formattedAnswers, navError)
+    navError("/quiz/result");
 }

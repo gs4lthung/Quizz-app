@@ -45,19 +45,19 @@ export default function ScreenResult(props) {
         <div className="vkRange">
           <svg viewBox="0 0 32 32" width="100" height="100">
             <circle r="16" cx="16" cy="16" strokeDasharray={`
-              ${props.quizData.lsQuizz
-                ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
+              ${selectedAnswers
+                ? Math.floor((result / 4) * 100)
                 : 0
               }
               100 
               `}></circle>
           </svg>
-          <div>{props.quizData.lsQuizz
-            ? Math.floor((result / Object.entries(props.quizData.lsQuizz).length) * 100)
-            : 0}
+          <div>{selectedAnswers
+            ? Math.floor((result / 4) * 100)
+            : 0}%
           </div>
         </div>
-        <div className='form__mark'>{`${result} / ${Object.entries(props.quizData.lsQuizz).length}`}</div>
+        <div className='form__mark'>{`${result} / ${4}`}</div>
         <button onClick={() => { nav('/quiz/result/answer') }} className='form__btn'>Review Answer</button>
       </div>
     </div>

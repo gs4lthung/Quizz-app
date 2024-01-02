@@ -37,5 +37,5 @@ export const HandleWrongLogin = (cntWrongLogin, SetIsSubmit) => {
         } else if (cntWrongLogin > 0 && cntWrongLogin < 5) {
             console.log('print has input wrong username of password')
         }
-    }, [cntWrongLogin])
+    }, [SetIsSubmit, cntWrongLogin])
 }

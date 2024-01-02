@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, Suspense } from 'react';
+import { useRef, useState, Suspense } from 'react';
 import { FetchData } from '../ScreenQuiz/QuizService'
 import LoadingPage from '../../layouts/LoadingPage/LoadingPage.js';
 import { useNavigate } from "react-router-dom";
@@ -19,13 +19,10 @@ export default function ScreenQuiz() {
     const nav = useNavigate();
     const [selectedAnswers, SetSelectedAnswers] = useState({});
     const countDownRef = useRef();
-    // console.log(questionList)
 
     LoadAnswers(SetSelectedAnswers);
     SaveAnswer(selectedAnswers);
 
-    useEffect(() => {
-    })
     return (
         <div className="question-form">
             <h1 className="time">

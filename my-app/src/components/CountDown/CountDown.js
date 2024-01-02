@@ -44,7 +44,7 @@ export const CountDown = forwardRef((props, ref) => {
       }
     }
     TimeOut();
-  }, [time]);
+  }, [interval, nav, props.navError, props.quizId, props.seconds, props.selectedAnswers, time]);
 
   useImperativeHandle(ref, () => ({
     getTime: () => fTime - time,
